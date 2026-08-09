@@ -1,0 +1,1 @@
+With this app, you can connect your Nordlux smart light bulbs from Homey. Note that the bridge is required to use this app, direct BLE connections are not supported. Also note that when you sign out from the Nordlux mobile app on any phone, Nordlux will automatically log you out everywhere, so you'll need to log in to this Homey app again as well.

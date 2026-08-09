@@ -1,0 +1,36 @@
+{
+  "id": "com.nordlux",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Nordlux Smart Light"
+  },
+  "brandColor": "#2D4F95",
+  "source": "https://github.com/smarthomesven/homey-nordlux",
+  "bugs": {
+    "url": "https://github.com/smarthomesven/homey-nordlux/issues"
+  },
+  "description": {
+    "en": "There's a perfect light for everyone"
+  },
+  "category": [
+    "lights"
+  ],
+  "permissions": [
+    "homey:wireless:ble"
+  ],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Sven Serlier",
+    "email": "sven@dypodex.com"
+  }
+}
