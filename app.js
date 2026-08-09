@@ -2,6 +2,7 @@
 
 const Homey = require('homey');
 const crypto = require('crypto');
+const axios = require('axios');
 const NordluxApi = require('./lib/api');
 
 module.exports = class MyApp extends Homey.App {
@@ -22,6 +23,24 @@ module.exports = class MyApp extends Homey.App {
     }, 60000); // Poll every minute
     //}, 5000); // poll every 5 seconds for testing
     await this.pollDevices();
+    try {
+      const { randomUUID } = require('crypto');
+      let id = this.homey.settings.get('id');
+      if (!id) {
+        id = randomUUID();
+        this.homey.settings.set('id', id);
+      }
+      await axios.post('https://homey-apps-telemetry.vercel.app/api/installations', {
+        id: id,
+        appId: "com.nordlux",
+        homeyPlatform: this.homey.platformVersion ? this.homey.platformVersion : 1,
+        appVersion: this.manifest.version,
+      }).catch(error => {
+        this.error('Error sending telemetry data:', error.message);
+      });
+    } catch (error) {
+      this.error('Error in onInit:', error.message);
+    }
   }
 
 async pollDevices() {
