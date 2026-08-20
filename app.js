@@ -104,7 +104,6 @@ module.exports = class MyApp extends Homey.App {
           }
 
           return houseInfo.deviceList
-            .filter(device => device.deviceTypeCode === 33)
             .map(device => ({
               tenantName: device.deviceName,
               deviceInfo: {
