@@ -43,6 +43,95 @@ module.exports = class MyApp extends Homey.App {
     }
   }
 
+  async getLinksData() {
+    try {
+      const api = new NordluxApi({ log: this.log });
+      const token = this.homey.settings.get('token');
+      const accountId = this.homey.settings.get('accountId');
+      const uniqueIndication = this.homey.settings.get('indication');
+
+      const commonPayload = {
+        accountId,
+        appCode: "nordlux",
+        appVersion: "v2.6.2",
+        buildVersion: 137,
+        mobileBrand: "samsung",
+        mobileModel: "SM-A515F",
+        mobileSystemType: "android",
+        mobileSystemVersion: "Android 13",
+        uniqueIndication,
+        version: "v2.0.0",
+        token,
+      };
+
+      const housesData = await api._post('/smartLight/api/sync/syncHouse', commonPayload);
+
+      if (!housesData || !housesData.houseList) {
+        throw new Error('No houses found for the account.');
+      }
+
+      // Filter houses that have devices to check
+      const validHouses = housesData.houseList.filter(house => house && house.houseId && house.deviceNum >= 1);
+
+      // Fetch house info + device status for all valid houses concurrently
+      const housePromises = validHouses.map(async (house) => {
+        try {
+          const houseInfo = await api._post('smartLight/api/house/getHouseInfo', {
+            ...commonPayload,
+            houseId: house.houseId,
+          });
+
+          if (!houseInfo || !Array.isArray(houseInfo.deviceList)) {
+            return [];
+          }
+
+          // Fetch status for all devices in this house, same call pollDevices() uses
+          let statusByDeviceId = {};
+          try {
+            const statusData = await api._post('/smartLight/api/device/getDeviceStatus', {
+              ...commonPayload,
+              houseId: house.houseId,
+            });
+            this.log('Data:', statusData);
+            if (statusData && Array.isArray(statusData.deviceList)) {
+              statusByDeviceId = statusData.deviceList.reduce((acc, status) => {
+                acc[status.deviceId] = status;
+                return acc;
+              }, {});
+            }
+          } catch (statusErr) {
+            this.log(`Failed to fetch status for house ${house.houseId}:`, statusErr);
+          }
+
+          return houseInfo.deviceList
+            .filter(device => device.deviceTypeCode === 33)
+            .map(device => ({
+              tenantName: device.deviceName,
+              deviceInfo: {
+                displayName: device.deviceName,
+                deviceId: device.deviceMac,
+                type: device.deviceTypeCode,
+              },
+              deviceObj: device,
+              statusObj: statusByDeviceId[device.deviceId] || null,
+            }));
+        } catch (err) {
+          this.log(`Failed to fetch info for house ${house.houseId}:`, err);
+        }
+        return [];
+      });
+
+      const devicesPerHouse = await Promise.all(housePromises);
+
+      // Flatten all device arrays into a single list
+      const allDevices = devicesPerHouse.flat();
+
+      return allDevices;
+    } catch (error) {
+      return { error: error.message };
+    }
+  }
+
 async pollDevices() {
   const api = this._api;
   const token = this.homey.settings.get('token');
