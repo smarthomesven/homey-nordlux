@@ -10,5 +10,8 @@
   },
   "1.0.3": {
     "en": "Fixed settings page"
+  },
+  "1.0.4": {
+    "en": "Added new device type to E27 Standard driver"
   }
 }
