@@ -16,9 +16,13 @@ module.exports = class MyDevice extends Homey.Device {
     this._roomId = this.getStoreValue('roomId');
     this._roomCode = this.getStoreValue('roomCode');
     this._conAddress = this.getStoreValue('address');
+    this._type = this.getStoreValue('deviceTypeCode');
     this._api = new NordluxApi({ log: this.log });
-    if (!this.hasCapability('light_temperature')) {
+    if (!this.hasCapability('light_temperature') && this._type === 33) {
       await this.addCapability('light_temperature');
+    }
+    if (this.hasCapability('light_temperature') && this._type === 9) {
+      await this.removeCapability('light_temperature');
     }
     this.registerCapabilityListener('onoff', async (value) => {
       try {
@@ -110,50 +114,52 @@ module.exports = class MyDevice extends Homey.Device {
       }
     });
 
-    this.registerCapabilityListener('light_temperature', async (value) => {
-      try {
-        const api = this._api;
-        const token = this.homey.settings.get('token');
-        const accountId = this.homey.settings.get('accountId');
-        const uniqueIndication = this.homey.settings.get('indication');
+    if (this.hasCapability('light_temperature')) {
+      this.registerCapabilityListener('light_temperature', async (value) => {
+        try {
+          const api = this._api;
+          const token = this.homey.settings.get('token');
+          const accountId = this.homey.settings.get('accountId');
+          const uniqueIndication = this.homey.settings.get('indication');
 
-        const payload = {
-          addressType: 0,
-          appkeyIndex: 0,
-          conAddress: this._conAddress,
-          conList: [
-            {
-              conModel: 4864,
-              conName: "cct",
-              conValue: Math.round(900 - Math.max(0, Math.min(1, value) * 99)),
-            }
-          ],
-          elemIndex: 0,
-          houseId: this._houseId,
-          roomCode: this._roomCode,
-          targetId: this._deviceId,
-          targetType: 0,
-          type: 1,
-          uv: 0,
-          accountId,
-          appCode: "nordlux",
-          appVersion: "v2.6.2",
-          buildVersion: 137,
-          mobileBrand: "samsung",
-          mobileModel: "SM-A515F",
-          mobileSystemType: "android",
-          mobileSystemVersion: "Android 13",
-          token,
-          uniqueIndication,
-          version: "v2.0.0",
-        };
+          const payload = {
+            addressType: 0,
+            appkeyIndex: 0,
+            conAddress: this._conAddress,
+            conList: [
+              {
+                conModel: 4864,
+                conName: "cct",
+                conValue: Math.round(900 - Math.max(0, Math.min(1, value) * 99)),
+              }
+            ],
+            elemIndex: 0,
+            houseId: this._houseId,
+            roomCode: this._roomCode,
+            targetId: this._deviceId,
+            targetType: 0,
+            type: 1,
+            uv: 0,
+            accountId,
+            appCode: "nordlux",
+            appVersion: "v2.6.2",
+            buildVersion: 137,
+            mobileBrand: "samsung",
+            mobileModel: "SM-A515F",
+            mobileSystemType: "android",
+            mobileSystemVersion: "Android 13",
+            token,
+            uniqueIndication,
+            version: "v2.0.0",
+          };
 
-        await api._post('/smartLight/api/device/controllerBLE', payload);
-      } catch (error) {
-        this.log('Error controlling device:', error);
-        throw new Error('Failed to control device. Please try again.');
-      }
-    });
+          await api._post('/smartLight/api/device/controllerBLE', payload);
+        } catch (error) {
+          this.log('Error controlling device:', error);
+          throw new Error('Failed to control device. Please try again.');
+        }
+      });
+    }
   }
 
   /**

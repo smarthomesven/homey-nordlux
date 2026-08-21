@@ -48,7 +48,7 @@
   "drivers": [
     {
       "name": {
-        "en": "E27 SMD"
+        "en": "E27 Standard"
       },
       "class": "light",
       "capabilities": [
