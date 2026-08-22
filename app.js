@@ -182,7 +182,9 @@ async pollDevices() {
           }
           await device.setCapabilityValue('onoff', deviceStatus.power === 1);
           await device.setCapabilityValue('dim', deviceStatus.bri / 100);
-          await device.setCapabilityValue('light_temperature', (900 - Math.max(801, Math.min(900, deviceStatus.cct))) / 99);
+          if (device.getStoreValue('deviceTypeCode') === 33) {
+            await device.setCapabilityValue('light_temperature', (900 - Math.max(801, Math.min(900, deviceStatus.cct))) / 99);
+          }
         }
       }
     }
