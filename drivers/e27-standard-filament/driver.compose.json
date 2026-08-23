@@ -1,12 +1,11 @@
 {
   "name": {
-    "en": "E27 SMD"
+    "en": "E27 Standard Filament"
   },
   "class": "light",
   "capabilities": [
     "onoff",
-    "dim",
-    "light_temperature"
+    "dim"
   ],
   "platforms": [
     "local"

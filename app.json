@@ -48,7 +48,7 @@
   "drivers": [
     {
       "name": {
-        "en": "E27 Standard"
+        "en": "E27 SMD"
       },
       "class": "light",
       "capabilities": [
@@ -92,6 +92,99 @@
         }
       ],
       "id": "e27-standard"
+    },
+    {
+      "name": {
+        "en": "E27 Standard Filament"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/e27-standard-filament/assets/images/small.png",
+        "large": "/drivers/e27-standard-filament/assets/images/large.png",
+        "xlarge": "/drivers/e27-standard-filament/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login"
+        }
+      ],
+      "id": "e27-standard-filament"
+    },
+    {
+      "name": {
+        "en": "Smart Spot GU10"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_temperature"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/smart-spot-gu10/assets/images/small.png",
+        "large": "/drivers/smart-spot-gu10/assets/images/large.png",
+        "xlarge": "/drivers/smart-spot-gu10/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login"
+        }
+      ],
+      "id": "smart-spot-gu10"
     }
   ]
 }
