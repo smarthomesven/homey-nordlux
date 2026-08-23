@@ -22,5 +22,8 @@
   },
   "1.1.1": {
     "en": "Update icon for GU10"
+  },
+  "1.1.2": {
+    "en": "Fixed pairing for GU10"
   }
 }
