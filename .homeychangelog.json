@@ -16,5 +16,8 @@
   },
   "1.0.5": {
     "en": "Fixed capability issue for E27 Standard"
+  },
+  "1.1.0": {
+    "en": "Added E27 Standard Filament and Smart Spot GU10"
   }
 }
