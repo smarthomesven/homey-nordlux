@@ -19,5 +19,8 @@
   },
   "1.1.0": {
     "en": "Added E27 Standard Filament and Smart Spot GU10"
+  },
+  "1.1.1": {
+    "en": "Update icon for GU10"
   }
 }
