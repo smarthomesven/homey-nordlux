@@ -25,5 +25,8 @@
   },
   "1.1.2": {
     "en": "Fixed pairing for GU10"
+  },
+  "1.1.3": {
+    "en": "Update dependencies"
   }
 }
