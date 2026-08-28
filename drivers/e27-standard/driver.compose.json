@@ -19,6 +19,12 @@
     "large": "{{driverAssetsPath}}/images/large.png",
     "xlarge": "{{driverAssetsPath}}/images/xlarge.png"
   },
+  "energy": {
+    "approximation": {
+      "usageOn": 7,
+      "usageOff": 0.3
+    }
+  },
   "pair": [
     {
       "id": "login"
