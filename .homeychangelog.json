@@ -31,5 +31,8 @@
   },
   "1.1.4": {
     "en": "Added energy approximations for E27 SMD"
+  },
+  "1.1.5": {
+    "en": "Removed metrics"
   }
 }
