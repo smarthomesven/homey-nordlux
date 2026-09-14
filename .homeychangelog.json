@@ -34,5 +34,8 @@
   },
   "1.1.5": {
     "en": "Removed metrics"
+  },
+  "1.1.6": {
+    "en": "Translated error messages"
   }
 }
