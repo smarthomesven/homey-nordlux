@@ -157,7 +157,7 @@ async pollDevices() {
         const deviceStatus = houseInfo.deviceList.find(d => d.deviceId === device.getData().id);
         if (deviceStatus) {
           if (deviceStatus.isOnLine !== 1) {
-            await device.setUnavailable("The light is unreachable. Is it powered on and connected to the bridge?");
+            await device.setUnavailable(this.homey.__('errors.offline'));
             continue;
           } else {
             await device.setAvailable();
@@ -176,7 +176,7 @@ async pollDevices() {
     const drivers = this.homey.drivers.getDrivers();
     for (const driver of Object.values(drivers)) {
       for (const device of driver.getDevices()) {
-        await device.setUnavailable("Could not connect to the Nordlux server. Please check your internet connection.");
+        await device.setUnavailable(this.homey.__('errors.server'));
       }
     }
   }

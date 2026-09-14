@@ -23,5 +23,9 @@
         "cancel": "Cancel",
         "sent": "Your configuration has been sent! You can mention the ID below on the forum, only the developer can use it to view your configuration",
         "sending": "Sending"
+    },
+    "errors": {
+        "server": "Could not connect to the Nordlux server. Please check your internet connection.",
+        "offline": "The light is unreachable. Is it powered on and connected to the bridge?"
     }
 }

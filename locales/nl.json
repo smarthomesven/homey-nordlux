@@ -1,0 +1,6 @@
+{
+    "errors": {
+        "server": "De Nordlux-server is onbereikbaar. Controleer je internetverbinding.",
+        "offline": "De lamp is onbereikbaar. Is deze aangesloten en verbonden met de Bridge?"
+    }
+}
