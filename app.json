@@ -147,6 +147,53 @@
     },
     {
       "name": {
+        "en": "GU10 Plastic"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_temperature"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/gu10-plastic/assets/images/small.png",
+        "large": "/drivers/gu10-plastic/assets/images/large.png",
+        "xlarge": "/drivers/gu10-plastic/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login"
+        }
+      ],
+      "id": "gu10-plastic"
+    },
+    {
+      "name": {
         "en": "Smart Spot GU10"
       },
       "class": "light",
