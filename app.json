@@ -48,6 +48,52 @@
   "drivers": [
     {
       "name": {
+        "en": "E27 Decorative"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/e27-decorative/assets/images/small.png",
+        "large": "/drivers/e27-decorative/assets/images/large.png",
+        "xlarge": "/drivers/e27-decorative/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login"
+        }
+      ],
+      "id": "e27-decorative"
+    },
+    {
+      "name": {
         "en": "E27 SMD"
       },
       "class": "light",
