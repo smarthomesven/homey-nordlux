@@ -26,34 +26,64 @@ module.exports = class MyDriver extends Homey.Driver {
       try {
         const api = new NordluxApi({ log: this.log });
         const { email, password } = data;
-        const response = await api._post('smartLight/api/account/emailLogin', {
-          email,
-          password,
-          languages: "en",
-          pushToken: "",
-          appCode: "nordlux",
-          appVersion: "v2.6.2",
-          buildVersion: 137,
-          mobileBrand: "samsung",
-          mobileModel: "SM-A515F",
-          accountId: "test_account_id",
-          mobileSystemType: "android",
-          mobileSystemVersion: "Android 13",
-          uniqueIndication: this.homey.settings.get('indication'),
-          version: "v2.0.0",
-        });
-        if (response && response.hasGateway !== 1) {
-          return { success: false, error: "A Nordlux bridge is required to use this app." };
+
+        let response;
+
+        try {
+          response = await api._post('smartLight/api/account/emailLogin', {
+            email,
+            password,
+            languages: 'en',
+            pushToken: '',
+            appCode: 'nordlux',
+            appVersion: 'v2.6.2',
+            buildVersion: 137,
+            mobileBrand: 'samsung',
+            mobileModel: 'SM-A515F',
+            accountId: 'test_account_id',
+            mobileSystemType: 'android',
+            mobileSystemVersion: 'Android 13',
+            uniqueIndication: this.homey.settings.get('indication'),
+            version: 'v2.0.0',
+          });
+        } catch (error) {
+          if (error?.message === 'Nordlux API error: 邮箱或密码错误') {
+            return { success: false, error: 'INVALID' };
+          }
+
+          if (error?.message === 'Nordlux API error: 账号不存在') {
+            return { success: false, error: 'NOUSER' };
+          }
+
+          this.log('Error during login API call:', error);
+          return {
+            success: false,
+            error: 'An error occurred during login. Please try again.',
+          };
         }
+
+        if (!response || response.hasGateway !== 1) {
+          return {
+            success: false,
+            error: 'A Nordlux bridge is required to use this app.',
+          };
+        }
+
         this.homey.settings.set('token', response.token);
         this.homey.settings.set('accountId', response.accountId);
         this.homey.settings.set('userId', response.userId);
         this.homey.settings.set('username', email);
+
         await session.showView('list_devices');
+
         return { success: true };
       } catch (error) {
         this.log('Error during login:', error);
-        return { success: false, error: "An error occurred during login. Please try again." };
+
+        return {
+          success: false,
+          error: 'An error occurred during login. Please try again.',
+        };
       }
     });
 

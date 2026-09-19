@@ -24,6 +24,8 @@
         <p id="nopassword" class="error" data-i18n="pair.nopassword"></p>
       </div>
     </fieldset>
+    <p id="invalid" class="error" data-i18n="pair.invalid">Invalid username or password</p>
+    <p id="nouser" class="error" data-i18n="pair.nouser">This account does not exist</p>
     <p id="failed" class="error" data-i18n="pair.failed">Something went wrong, please try again.</p>
 
     <button id="save" class="homey-button-primary-full" data-i18n="pair.save">Save</button>
@@ -31,9 +33,11 @@
       const emailElement = document.getElementById('email');
       const passwordElement = document.getElementById('password');
       const errorElement = document.getElementById('failed');
+      const invalidElement = document.getElementById('invalid');
+      const noUserElement = document.getElementById('nouser');
       const saveElement = document.getElementById('save');
-      errorElement.style.display = 'none';
         saveElement.addEventListener("click", function (e) {
+          setSaving();
           if (!emailElement.value) {
             document.getElementById('noemail').style.display = 'block';
             return;
@@ -46,11 +50,23 @@
           } else {
             document.getElementById('nopassword').style.display = 'none';
           }
-          setSaving();
+          errorElement.style.display = 'none';
+          invalidElement.style.display = 'none';
+          noUserElement.style.display = 'none';
           const email = emailElement.value;
           const password = passwordElement.value;
           Homey.emit("login", { email: email, password: password  }).then(function (result) {
             if (result.success === false) {
+              if (result.error === "INVALID") {
+                invalidElement.style.display = "block";
+                setSave();
+                return;
+              }
+              if (result.error === "NOUSER") {
+                noUserElement.style.display = "block";
+                setSave();
+                return;
+              }
               errorElement.style.display = 'block';
               errorElement.innerText = result.error;
               setSave();
