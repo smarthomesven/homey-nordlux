@@ -48,6 +48,100 @@
   "drivers": [
     {
       "name": {
+        "en": "E14 Globe"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_temperature"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/e14-globe/assets/images/small.png",
+        "large": "/drivers/e14-globe/assets/images/large.png",
+        "xlarge": "/drivers/e14-globe/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login"
+        }
+      ],
+      "id": "e14-globe"
+    },
+    {
+      "name": {
+        "en": "E27 A60 Filament"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_temperature"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/e27-a60-filament/assets/images/small.png",
+        "large": "/drivers/e27-a60-filament/assets/images/large.png",
+        "xlarge": "/drivers/e27-a60-filament/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login"
+        }
+      ],
+      "id": "e27-a60-filament"
+    },
+    {
+      "name": {
         "en": "E27 Decorative"
       },
       "class": "light",
@@ -91,6 +185,53 @@
         }
       ],
       "id": "e27-decorative"
+    },
+    {
+      "name": {
+        "en": "E27 Globe Filament"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_temperature"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/e27-globe-filament/assets/images/small.png",
+        "large": "/drivers/e27-globe-filament/assets/images/large.png",
+        "xlarge": "/drivers/e27-globe-filament/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login"
+        }
+      ],
+      "id": "e27-globe-filament"
     },
     {
       "name": {
@@ -237,6 +378,53 @@
         }
       ],
       "id": "gu10-plastic"
+    },
+    {
+      "name": {
+        "en": "OJA"
+      },
+      "class": "light",
+      "capabilities": [
+        "onoff",
+        "dim",
+        "light_temperature"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "images": {
+        "small": "/drivers/oja/assets/images/small.png",
+        "large": "/drivers/oja/assets/images/large.png",
+        "xlarge": "/drivers/oja/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login"
+        }
+      ],
+      "id": "oja"
     },
     {
       "name": {
