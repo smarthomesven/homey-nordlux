@@ -52,5 +52,8 @@
   },
   "1.4.1": {
     "en": "Added extra type ID for E27 SMD"
+  },
+  "1.4.2": {
+    "en": "Added extra type ID for E27 Globe Filament"
   }
 }
