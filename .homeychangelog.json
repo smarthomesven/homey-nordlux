@@ -49,5 +49,8 @@
   },
   "1.4.0": {
     "en": "Added OJA, E14 Globe, E27 A60 Filament and E27 Globe Filament"
+  },
+  "1.4.1": {
+    "en": "Added extra type ID for E27 SMD"
   }
 }
