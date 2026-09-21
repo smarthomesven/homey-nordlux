@@ -2,7 +2,6 @@
 
 const Homey = require('homey');
 const crypto = require('crypto');
-const axios = require('axios');
 const NordluxApi = require('./lib/api');
 
 module.exports = class MyApp extends Homey.App {
