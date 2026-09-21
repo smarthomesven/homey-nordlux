@@ -127,7 +127,7 @@ module.exports = class MyDriver extends Homey.Driver {
 
             if (houseInfo && Array.isArray(houseInfo.deviceList)) {
               return houseInfo.deviceList
-                .filter(device => device.deviceTypeCode === 67)
+                .filter(device => device.deviceTypeCode === 67 || device.deviceTypeCode === 41)
                 .map(device => ({
                   name: device.deviceName,
                   data: {
