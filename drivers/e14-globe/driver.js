@@ -4,13 +4,13 @@ const Homey = require('homey');
 const NordluxApi = require('../../lib/api');
 
 
-module.exports = class MyDriver extends Homey.Driver {
+module.exports = class E14GlobeDriver extends Homey.Driver {
 
   /**
    * onInit is called when the driver is initialized.
    */
   async onInit() {
-    this.log('MyDriver has been initialized');
+    this.log('E14 Globe driver has been initialized');
   }
 
   async onPair(session) {
@@ -155,8 +155,6 @@ module.exports = class MyDriver extends Homey.Driver {
         const allDevices = devicesPerHouse.flat();
 
         return allDevices;
-
-        throw new Error('No E27 devices found in any houses.');
       } catch (error) {
         this.log('Error during device listing:', error);
         throw new Error('Failed to list devices. Please try again.');

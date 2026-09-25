@@ -4,7 +4,7 @@ const Homey = require('homey');
 const NordluxApi = require('../../lib/api');
 
 
-module.exports = class MyDevice extends Homey.Device {
+module.exports = class E14GlobeDevice extends Homey.Device {
 
   /**
    * onInit is called when the device is initialized.
