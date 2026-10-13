@@ -3,6 +3,7 @@
 const Homey = require('homey');
 const crypto = require('crypto');
 const NordluxApi = require('./lib/api');
+const HomeyPush = require('./lib/push');
 
 module.exports = class MyApp extends Homey.App {
 
@@ -11,6 +12,8 @@ module.exports = class MyApp extends Homey.App {
    */
   async onInit() {
     this.log('MyApp has been initialized');
+    this.push = new HomeyPush(this);
+    await this.push.startPush();
     this._api = new NordluxApi({ log: this.log });
     if (!this.homey.settings.get('indication')) {
       const cloudId = await this.homey.cloud.getHomeyId();
@@ -179,5 +182,12 @@ async pollDevices() {
       }
     }
   }
+}
+
+async onUninit() {
+  this.log('MyApp is being uninitialized');
+  if (this.push) {
+    this.push.stopPush();
+  } 
 }
 };
